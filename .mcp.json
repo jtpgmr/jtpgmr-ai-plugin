@@ -1,0 +1,84 @@
+{
+    "mcpServers": {
+        "sequential-thinking": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-sequential-thinking"
+            ]
+        },
+        "memory": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-memory"
+            ],
+            "env": {
+                "MEMORY_FILE_PATH": "${CLAUDE_PLUGIN_DATA}/memory.json"
+            }
+        },
+        "markitdown": {
+            "command": "uvx",
+            "args": [
+                "markitdown-mcp"
+            ]
+        },
+        "pandoc": {
+            "command": "uvx",
+            "args": [
+                "mcp-pandoc"
+            ]
+        },
+        "playwright": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@playwright/mcp@latest"
+            ]
+        },
+        "calculator": {
+            "command": "uvx",
+            "args": [
+                "mcp-server-calculator"
+            ]
+        },
+        "excel": {
+            "command": "uvx",
+            "args": [
+                "excel-mcp-server",
+                "stdio"
+            ]
+        },
+        "context7": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@upstash/context7-mcp@latest"
+            ]
+        },
+        "python-analyzer": {
+            "command": "uvx",
+            "args": [
+                "mcp-server-analyzer@latest"
+            ],
+            "description": "Uses Ruff + Vulture for Python linting, formatting, and dead-code detection."
+        },
+        "github": {
+            "type": "http",
+            "url": "https://api.githubcopilot.com/mcp/",
+            "headers": {
+                "Authorization": "Bearer ${GITHUB_PERSONAL_ACCESS_TOKEN}"
+            }
+        },
+        "postgres": {
+            "command": "uvx",
+            "args": [
+                "postgres-mcp",
+                "--access-mode=restricted"
+            ],
+            "env": {
+                "DATABASE_URI": "${DB__DATABASE_URI}"
+            }
+        }
+    }
+}

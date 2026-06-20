@@ -1,0 +1,49 @@
+# ---- Secrets & environment ----
+.env
+.env.*
+!.env.example              # the env contract is committed, per the boundary rules
+*.pem
+*.key
+.credentials.json
+.service_token.json        # token caches written by MCP token handlers (chmod 0600)
+# add any other *_token.json / cache filenames your handlers write
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+# NOTE: commit uv.lock, .python-version, and pyproject.toml — they are NOT ignored
+
+# ---- Test / type / lint caches ----
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.coverage
+.coverage.*
+htmlcov/
+
+# ---- Local data (inputs/outputs) ----
+data/
+!data/.gitkeep
+
+# ---- Node (npx-based MCP servers, JS hooks, channel scaffolds) ----
+node_modules/
+npm-debug.log*
+
+# ---- Claude Code (per-machine, not shared) ----
+.claude/settings.local.json
+# keep .claude/settings.json if you intend to share project config
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+*.swp
+*.log
+.idea/
+.vscode/

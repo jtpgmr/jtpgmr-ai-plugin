@@ -1,0 +1,17 @@
+{
+    "name": "jtpgmr",
+    "version": "0.1.0",
+    "category": "productivity",
+    "keywords": [
+        "consistency",
+        "standards",
+        "python"
+    ],
+    "plugins": [
+        {
+            "name": "jtpgmr-ai-plugin",
+            "source": "./",
+            "description": "Python-standards skill and MCP servers"
+        }
+    ]
+}
