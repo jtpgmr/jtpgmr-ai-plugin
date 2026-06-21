@@ -79,6 +79,32 @@
             "env": {
                 "DATABASE_URI": "${DB__DATABASE_URI}"
             }
+        },
+        "docker": {
+            "command": "uvx",
+            "args": [
+                "docker-mcp"
+            ]
+        },
+        "ollama": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "ollama-mcp"
+            ],
+            "env": {
+                "OLLAMA_HOST": "http://127.0.0.1:11434"
+            }
+        },
+        "vllm": {
+            "command": "uvx",
+            "args": [
+                "vllm-mcp-server"
+            ],
+            "env": {
+                "VLLM_BASE_URL": "http://localhost:8000",
+                "VLLM_HF_TOKEN": "${VLLM_HF_TOKEN}"
+            }
         }
     }
 }
