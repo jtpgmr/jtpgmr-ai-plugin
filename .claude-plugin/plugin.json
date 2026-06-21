@@ -1,4 +1,11 @@
 {
     "name": "jtpgmr-ai-plugin",
-    "version": "0.1.0"
+    "version": "0.1.0",
+    "description": "Python-standards skill and MCP servers",
+    "author": {
+        "name": "Jose Luis Cruz, Jr.",
+        "email": "jtpgmr@gmail.com"
+    },
+    "skills": "./skills/",
+    "mcpServers": "./.mcp.json"
 }
