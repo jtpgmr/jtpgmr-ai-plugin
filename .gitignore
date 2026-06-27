@@ -47,3 +47,6 @@ Thumbs.db
 *.log
 .idea/
 .vscode/
+
+.remember/
+.memory/

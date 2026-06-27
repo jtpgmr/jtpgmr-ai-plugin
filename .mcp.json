@@ -1,110 +1,134 @@
 {
-    "mcpServers": {
-        "sequential-thinking": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "@modelcontextprotocol/server-sequential-thinking"
-            ]
-        },
-        "memory": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "@modelcontextprotocol/server-memory"
-            ],
-            "env": {
-                "MEMORY_FILE_PATH": "${CLAUDE_PLUGIN_DATA}/memory.json"
-            }
-        },
-        "markitdown": {
-            "command": "uvx",
-            "args": [
-                "markitdown-mcp"
-            ]
-        },
-        "pandoc": {
-            "command": "uvx",
-            "args": [
-                "mcp-pandoc"
-            ]
-        },
-        "playwright": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "@playwright/mcp@latest"
-            ]
-        },
-        "calculator": {
-            "command": "uvx",
-            "args": [
-                "mcp-server-calculator"
-            ]
-        },
-        "excel": {
-            "command": "uvx",
-            "args": [
-                "excel-mcp-server",
-                "stdio"
-            ]
-        },
-        "context7": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "@upstash/context7-mcp@latest"
-            ]
-        },
-        "python-analyzer": {
-            "command": "uvx",
-            "args": [
-                "mcp-server-analyzer@latest"
-            ],
-            "description": "Uses Ruff + Vulture for Python linting, formatting, and dead-code detection."
-        },
-        "github": {
-            "type": "http",
-            "url": "https://api.githubcopilot.com/mcp/",
-            "headers": {
-                "Authorization": "Bearer ${GITHUB_PERSONAL_ACCESS_TOKEN}"
-            }
-        },
-        "postgres": {
-            "command": "uvx",
-            "args": [
-                "postgres-mcp",
-                "--access-mode=restricted"
-            ],
-            "env": {
-                "DATABASE_URI": "${DB__DATABASE_URI}"
-            }
-        },
-        "docker": {
-            "command": "uvx",
-            "args": [
-                "docker-mcp"
-            ]
-        },
-        "ollama": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "ollama-mcp"
-            ],
-            "env": {
-                "OLLAMA_HOST": "http://127.0.0.1:11434"
-            }
-        },
-        "vllm": {
-            "command": "uvx",
-            "args": [
-                "vllm-mcp-server"
-            ],
-            "env": {
-                "VLLM_BASE_URL": "http://localhost:8000",
-                "VLLM_HF_TOKEN": "${VLLM_HF_TOKEN}"
-            }
-        }
+  "mcpServers": {
+    "sequential-thinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    "basic-memory": {
+      "command": "uvx",
+      "args": [
+        "basic-memory",
+        "mcp"
+      ],
+      "env": {
+        "BASIC_MEMORY_DATABASE_BACKEND": "${DB__BASIC_MEMORY_DIALECT}",
+        "BASIC_MEMORY_DATABASE_URL": "${DB__BASIC_MEMORY_URI}"
+      }
+    },
+    "python-analyzer": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-analyzer@latest"
+      ]
+    },
+    "github": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "headers": {
+        "Authorization": "Bearer ${GITHUB__PERSONAL_ACCESS_TOKEN}"
+      }
+    },
+    "postgres": {
+      "command": "uvx",
+      "args": [
+        "postgres-mcp",
+        "--access-mode=restricted"
+      ],
+      "env": {
+        "DATABASE_URI": "${DB__DATABASE_URI}"
+      }
+    },
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp@latest"
+      ]
+    },
+    "docker": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-docker"
+      ]
+    },
+    "obsidian": {
+      "type": "http",
+      "url": "${OBSIDIAN__MCP_URL}",
+      "headers": {
+        "Authorization": "Bearer ${OBSIDIAN__API_KEY}"
+      }
+    },
+    "excel": {
+      "command": "uvx",
+      "args": [
+        "excel-mcp-server",
+        "stdio"
+      ]
+    },
+    "markitdown": {
+      "command": "uvx",
+      "args": [
+        "markitdown-mcp"
+      ]
+    },
+    "pandoc": {
+      "command": "uvx",
+      "args": [
+        "mcp-pandoc"
+      ]
+    },
+    "powerpoint": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "office-powerpoint-mcp-server",
+        "ppt_mcp_server"
+      ]
+    },
+    "word-document-server": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "office-word-mcp-server",
+        "word_mcp_server"
+      ]
+    },
+    "pdf-reader": {
+      "command": "npx",
+      "args": [
+        "@sylphx/pdf-reader-mcp"
+      ]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest"
+      ]
+    },
+    "shadcn": {
+      "command": "npx",
+      "args": [
+        "shadcn@latest",
+        "mcp"
+      ]
+    },
+    "hugeicons": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@hugeicons/mcp-server"
+      ]
+    },
+    "better-icons": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "better-icons"
+      ]
     }
+  }
 }

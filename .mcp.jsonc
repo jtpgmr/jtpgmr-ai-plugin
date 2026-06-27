@@ -1,0 +1,180 @@
+{
+    "mcpServers": {
+        "sequential-thinking": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-sequential-thinking"
+            ]
+            // Step-by-step reasoning to break complex architectural or logic problems into ordered thought blocks
+            // src: https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking
+        },
+        "basic-memory": {
+            "command": "uvx",
+            "args": [
+                "basic-memory",
+                "mcp"
+            ],
+            "env": {
+                "BASIC_MEMORY_DATABASE_BACKEND": "${DB__BASIC_MEMORY_DIALECT}",
+                "BASIC_MEMORY_DATABASE_URL": "${DB__BASIC_MEMORY_URI}"
+            }
+            // A local-first MCP memory server that gives Claude persistent, searchable memory stored as human-readable Markdown notes
+            // src: https://github.com/basicmachines-co/basic-memory
+        },
+        "python-analyzer": {
+            "command": "uvx",
+            "args": [
+                "mcp-server-analyzer@latest"
+            ]
+            // Python linting, formatting, and dead-code detection via Ruff + Vulture
+            // src: https://github.com/anselmoo/mcp-server-analyzer
+        },
+        "github": {
+            "type": "http",
+            "url": "https://api.githubcopilot.com/mcp/",
+            "headers": {
+                "Authorization": "Bearer ${GITHUB__PERSONAL_ACCESS_TOKEN}"
+            }
+            // GitHub's official remote MCP server — repos, issues, PRs, Actions, and code search (PAT auth)
+            // src: https://github.com/github/github-mcp-server
+        },
+        "postgres": {
+            "command": "uvx",
+            "args": [
+                "postgres-mcp",
+                "--access-mode=restricted"
+            ],
+            "env": {
+                "DATABASE_URI": "${DB__DATABASE_URI}"
+            }
+            // Inspects schemas and runs SQL against PostgreSQL under restricted (read-mostly) access
+            // src: https://github.com/crystaldba/postgres-mcp
+            // ✅
+        },
+        "context7": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@upstash/context7-mcp@latest"
+            ]
+            // Pulls real-time, version-accurate library docs and code examples on demand
+            // src: https://github.com/upstash/context7
+            // ✅
+        },
+        "docker": {
+            "command": "uvx",
+            "args": [
+                "mcp-server-docker"
+            ]
+            // Full Docker management: images, networks, volumes, build/pull/push, and container lifecycle
+            // src: https://github.com/ckreiling/mcp-server-docker
+            // ✅
+        },
+        "obsidian": {
+            "type": "http",
+            "url": "${OBSIDIAN__MCP_URL}",
+            "headers": {
+                "Authorization": "Bearer ${OBSIDIAN__API_KEY}"
+            }
+            // Reads, searches, and edits an Obsidian vault via the `Local REST API with MCP` plugin
+            // src: https://github.com/MarkusPfundstein/mcp-obsidian
+            // ✅
+        },
+        "excel": {
+            "command": "uvx",
+            "args": [
+                "excel-mcp-server",
+                "stdio"
+            ]
+            // Reads, writes, and styles Excel workbooks via OpenPyXL — no local Excel install required
+            // src: https://github.com/haris-musa/excel-mcp-server
+            // ✅
+        },
+        "markitdown": {
+            "command": "uvx",
+            "args": [
+                "markitdown-mcp"
+            ]
+            // Converts Office docs, text, and binaries into clean Markdown (Microsoft markitdown)
+            // src: https://github.com/microsoft/markitdown
+            // ✅
+        },
+        "pandoc": {
+            "command": "uvx",
+            "args": [
+                "mcp-pandoc"
+            ]
+            // Converts documents between formats (Markdown, HTML, PDF, DOCX, and more) via pandoc
+            // src: https://github.com/vivekVells/mcp-pandoc
+            // ✅
+        },
+        "powerpoint": {
+            "command": "uvx",
+            "args": [
+                "--from",
+                "office-powerpoint-mcp-server",
+                "ppt_mcp_server"
+            ]
+            // Creates and edits .pptx presentations (slides, charts, tables) via python-pptx
+            // src: https://github.com/GongRzhe/Office-PowerPoint-MCP-Server
+            // ✅
+        },
+        "word-document-server": {
+            "command": "uvx",
+            "args": [
+                "--from",
+                "office-word-mcp-server",
+                "word_mcp_server"
+            ]
+            // Creates, reads, and edits .docx documents (text, tables, footnotes) via python-docx
+            // src: https://github.com/GongRzhe/Office-Word-MCP-Server
+        },
+        "pdf-reader": {
+            "command": "npx",
+            "args": [
+                "@sylphx/pdf-reader-mcp"
+            ]
+            // PDF intelligence: smart extraction, search, OCR, and visual-region evidence
+            // src: https://github.com/SylphxAI/pdf-reader-mcp
+        },
+        "playwright": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@playwright/mcp@latest"
+            ]
+            // Browser automation driven by the accessibility tree rather than screenshots
+            // src: https://github.com/microsoft/playwright-mcp
+        },
+        "shadcn": {
+            "command": "npx",
+            "args": [
+                "shadcn@latest",
+                "mcp"
+            ]
+            // Official shadcn/ui CLI MCP — browse and install components from registries
+            // src: https://www.npmjs.com/package/shadcn
+        },
+        "hugeicons": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@hugeicons/mcp-server"
+            ]
+            // Single-library icon search and glyph lookup for the Hugeicons set
+            // src: https://github.com/hugeicons/hugeicons
+            // ✅
+        },
+        "better-icons": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "better-icons"
+            ]
+            // Multi-library icon search across 200+ sets via Iconify, with asset retrieval
+            // src: https://github.com/better-auth/better-icons
+            // ✅
+        }
+    }
+}
