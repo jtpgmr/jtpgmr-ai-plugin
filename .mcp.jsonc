@@ -1,10 +1,87 @@
+// jtpgmr-ai-plugin MCP registry — annotated source of truth.
+// Build the shipped mirror:  npx -y strip-json-comments-cli .mcp.jsonc | jq . > .mcp.json
+// (.mcp.json is referenced by .claude-plugin/plugin.json "mcpServers" and doubles as project config.)
+// Env vars follow DOMAIN__NAME (double underscore): DB__*, GITHUB__*, OBSIDIAN__*.
+// ✅ = verified working in Claude Code (/mcp connects and a tool call succeeds).
 {
     "mcpServers": {
+        // === Programming & Developer Reference ===
+        "python-analyzer": {
+            "command": "uvx",
+            "args": [
+                "mcp-server-analyzer"
+            ]
+            // Python linting, formatting, and dead-code detection via Ruff + Vulture
+            // src: https://github.com/anselmoo/mcp-server-analyzer
+            // ✅
+        },
+        "context7": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@upstash/context7-mcp@latest"
+            ]
+            // Pulls real-time, version-accurate library docs and code examples on demand
+            // src: https://github.com/upstash/context7
+            // ✅
+        },
+        // === DevOps & Infrastructure ===
+        "github": {
+            "type": "http",
+            "url": "https://api.githubcopilot.com/mcp/",
+            "headers": {
+                "Authorization": "Bearer ${GITHUB__PERSONAL_ACCESS_TOKEN}"
+            }
+            // GitHub's official remote MCP server — repos, issues, PRs, Actions, and code search (PAT auth)
+            // src: https://github.com/github/github-mcp-server
+        },
+        "docker": {
+            "command": "uvx",
+            "args": [
+                "mcp-server-docker"
+            ]
+            // Full Docker management: images, networks, volumes, build/pull/push, and container lifecycle
+            // src: https://github.com/ckreiling/mcp-server-docker
+            // ✅
+        },
+        "docker-compose": {
+            "command": "uvx",
+            "args": [
+                "docker-mcp"
+            ]
+            // Docker Compose stack deployment plus basic container ops (create, logs, list) — use "docker" for full engine management
+            // src: https://github.com/QuantGeekDev/docker-mcp
+        },
+        // === Data & Databases ===
+        "postgres-readonly": {
+            "command": "uvx",
+            "args": [
+                "postgres-mcp",
+                "--access-mode=restricted"
+            ],
+            "env": {
+                "DATABASE_URI": "${DB__DATABASE_URI}"
+            }
+            // Inspects schemas and runs SQL against PostgreSQL under restricted (read-mostly) access
+            // src: https://github.com/crystaldba/postgres-mcp
+            // ✅
+        },
+        "excel": {
+            "command": "uvx",
+            "args": [
+                "excel-mcp-server",
+                "stdio"
+            ]
+            // Reads, writes, and styles Excel workbooks via OpenPyXL — no local Excel install required
+            // src: https://github.com/haris-musa/excel-mcp-server
+            // ✅
+        },
+        // === Reasoning, Memory & Knowledge ===
         "sequential-thinking": {
             "command": "npx",
             "args": [
                 "-y",
-                "@modelcontextprotocol/server-sequential-thinking"
+                "@modelcontextprotocol/server-sequential-thinking@latest"
             ]
             // Step-by-step reasoning to break complex architectural or logic problems into ordered thought blocks
             // src: https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking
@@ -22,55 +99,6 @@
             // A local-first MCP memory server that gives Claude persistent, searchable memory stored as human-readable Markdown notes
             // src: https://github.com/basicmachines-co/basic-memory
         },
-        "python-analyzer": {
-            "command": "uvx",
-            "args": [
-                "mcp-server-analyzer@latest"
-            ]
-            // Python linting, formatting, and dead-code detection via Ruff + Vulture
-            // src: https://github.com/anselmoo/mcp-server-analyzer
-        },
-        "github": {
-            "type": "http",
-            "url": "https://api.githubcopilot.com/mcp/",
-            "headers": {
-                "Authorization": "Bearer ${GITHUB__PERSONAL_ACCESS_TOKEN}"
-            }
-            // GitHub's official remote MCP server — repos, issues, PRs, Actions, and code search (PAT auth)
-            // src: https://github.com/github/github-mcp-server
-        },
-        "postgres": {
-            "command": "uvx",
-            "args": [
-                "postgres-mcp",
-                "--access-mode=restricted"
-            ],
-            "env": {
-                "DATABASE_URI": "${DB__DATABASE_URI}"
-            }
-            // Inspects schemas and runs SQL against PostgreSQL under restricted (read-mostly) access
-            // src: https://github.com/crystaldba/postgres-mcp
-            // ✅
-        },
-        "context7": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "@upstash/context7-mcp@latest"
-            ]
-            // Pulls real-time, version-accurate library docs and code examples on demand
-            // src: https://github.com/upstash/context7
-            // ✅
-        },
-        "docker": {
-            "command": "uvx",
-            "args": [
-                "mcp-server-docker"
-            ]
-            // Full Docker management: images, networks, volumes, build/pull/push, and container lifecycle
-            // src: https://github.com/ckreiling/mcp-server-docker
-            // ✅
-        },
         "obsidian": {
             "type": "http",
             "url": "${OBSIDIAN__MCP_URL}",
@@ -78,19 +106,10 @@
                 "Authorization": "Bearer ${OBSIDIAN__API_KEY}"
             }
             // Reads, searches, and edits an Obsidian vault via the `Local REST API with MCP` plugin
-            // src: https://github.com/MarkusPfundstein/mcp-obsidian
+            // src: https://github.com/coddingtonbear/obsidian-local-rest-api
             // ✅
         },
-        "excel": {
-            "command": "uvx",
-            "args": [
-                "excel-mcp-server",
-                "stdio"
-            ]
-            // Reads, writes, and styles Excel workbooks via OpenPyXL — no local Excel install required
-            // src: https://github.com/haris-musa/excel-mcp-server
-            // ✅
-        },
+        // === Documents, Presentations & Text Extraction ===
         "markitdown": {
             "command": "uvx",
             "args": [
@@ -133,11 +152,53 @@
         "pdf-reader": {
             "command": "npx",
             "args": [
-                "@sylphx/pdf-reader-mcp"
+                "-y",
+                "@sylphx/pdf-reader-mcp@latest"
             ]
             // PDF intelligence: smart extraction, search, OCR, and visual-region evidence
             // src: https://github.com/SylphxAI/pdf-reader-mcp
         },
+        // === Frontend & Design ===
+        "shadcn": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "shadcn@latest",
+                "mcp"
+            ]
+            // Official shadcn/ui CLI MCP — browse and install components from registries
+            // src: https://www.npmjs.com/package/shadcn
+        },
+        "magicui": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@magicuidesign/mcp@latest"
+            ]
+            // Official Magic UI MCP — browse and fetch animated React/Tailwind components (text effects, backgrounds, device mocks)
+            // src: https://github.com/magicuidesign/mcp
+        },
+        "hugeicons": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@hugeicons/mcp-server@latest"
+            ]
+            // Single-library icon search and glyph lookup for the Hugeicons set
+            // src: https://github.com/hugeicons/mcp-server
+            // ✅
+        },
+        "better-icons": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "better-icons@latest"
+            ]
+            // Multi-library icon search across 200+ sets via Iconify, with asset retrieval
+            // src: https://github.com/better-auth/better-icons
+            // ✅
+        },
+        // === Browser Automation & Testing ===
         "playwright": {
             "command": "npx",
             "args": [
@@ -147,34 +208,14 @@
             // Browser automation driven by the accessibility tree rather than screenshots
             // src: https://github.com/microsoft/playwright-mcp
         },
-        "shadcn": {
-            "command": "npx",
-            "args": [
-                "shadcn@latest",
-                "mcp"
-            ]
-            // Official shadcn/ui CLI MCP — browse and install components from registries
-            // src: https://www.npmjs.com/package/shadcn
-        },
-        "hugeicons": {
+        "chrome-devtools": {
             "command": "npx",
             "args": [
                 "-y",
-                "@hugeicons/mcp-server"
+                "chrome-devtools-mcp@latest"
             ]
-            // Single-library icon search and glyph lookup for the Hugeicons set
-            // src: https://github.com/hugeicons/hugeicons
-            // ✅
-        },
-        "better-icons": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "better-icons"
-            ]
-            // Multi-library icon search across 200+ sets via Iconify, with asset retrieval
-            // src: https://github.com/better-auth/better-icons
-            // ✅
+            // Live Chrome debugging and performance: DevTools traces, network/console inspection, page automation (official ChromeDevTools)
+            // src: https://github.com/ChromeDevTools/chrome-devtools-mcp
         }
     }
 }

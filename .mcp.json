@@ -1,10 +1,59 @@
 {
   "mcpServers": {
+    "python-analyzer": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-analyzer"
+      ]
+    },
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp@latest"
+      ]
+    },
+    "github": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "headers": {
+        "Authorization": "Bearer ${GITHUB__PERSONAL_ACCESS_TOKEN}"
+      }
+    },
+    "docker": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-docker"
+      ]
+    },
+    "docker-compose": {
+      "command": "uvx",
+      "args": [
+        "docker-mcp"
+      ]
+    },
+    "postgres-readonly": {
+      "command": "uvx",
+      "args": [
+        "postgres-mcp",
+        "--access-mode=restricted"
+      ],
+      "env": {
+        "DATABASE_URI": "${DB__DATABASE_URI}"
+      }
+    },
+    "excel": {
+      "command": "uvx",
+      "args": [
+        "excel-mcp-server",
+        "stdio"
+      ]
+    },
     "sequential-thinking": {
       "command": "npx",
       "args": [
         "-y",
-        "@modelcontextprotocol/server-sequential-thinking"
+        "@modelcontextprotocol/server-sequential-thinking@latest"
       ]
     },
     "basic-memory": {
@@ -18,55 +67,12 @@
         "BASIC_MEMORY_DATABASE_URL": "${DB__BASIC_MEMORY_URI}"
       }
     },
-    "python-analyzer": {
-      "command": "uvx",
-      "args": [
-        "mcp-server-analyzer@latest"
-      ]
-    },
-    "github": {
-      "type": "http",
-      "url": "https://api.githubcopilot.com/mcp/",
-      "headers": {
-        "Authorization": "Bearer ${GITHUB__PERSONAL_ACCESS_TOKEN}"
-      }
-    },
-    "postgres": {
-      "command": "uvx",
-      "args": [
-        "postgres-mcp",
-        "--access-mode=restricted"
-      ],
-      "env": {
-        "DATABASE_URI": "${DB__DATABASE_URI}"
-      }
-    },
-    "context7": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@upstash/context7-mcp@latest"
-      ]
-    },
-    "docker": {
-      "command": "uvx",
-      "args": [
-        "mcp-server-docker"
-      ]
-    },
     "obsidian": {
       "type": "http",
       "url": "${OBSIDIAN__MCP_URL}",
       "headers": {
         "Authorization": "Bearer ${OBSIDIAN__API_KEY}"
       }
-    },
-    "excel": {
-      "command": "uvx",
-      "args": [
-        "excel-mcp-server",
-        "stdio"
-      ]
     },
     "markitdown": {
       "command": "uvx",
@@ -99,7 +105,37 @@
     "pdf-reader": {
       "command": "npx",
       "args": [
-        "@sylphx/pdf-reader-mcp"
+        "-y",
+        "@sylphx/pdf-reader-mcp@latest"
+      ]
+    },
+    "shadcn": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "shadcn@latest",
+        "mcp"
+      ]
+    },
+    "magicui": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@magicuidesign/mcp@latest"
+      ]
+    },
+    "hugeicons": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@hugeicons/mcp-server@latest"
+      ]
+    },
+    "better-icons": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "better-icons@latest"
       ]
     },
     "playwright": {
@@ -109,25 +145,11 @@
         "@playwright/mcp@latest"
       ]
     },
-    "shadcn": {
-      "command": "npx",
-      "args": [
-        "shadcn@latest",
-        "mcp"
-      ]
-    },
-    "hugeicons": {
+    "chrome-devtools": {
       "command": "npx",
       "args": [
         "-y",
-        "@hugeicons/mcp-server"
-      ]
-    },
-    "better-icons": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "better-icons"
+        "chrome-devtools-mcp@latest"
       ]
     }
   }

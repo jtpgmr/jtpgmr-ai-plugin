@@ -1,0 +1,27 @@
+{
+    "enabledMcpjsonServers": [
+        "python-analyzer",
+        "context7",
+        "sequential-thinking",
+        "excel",
+        "markitdown",
+        "pandoc"
+    ],
+    "disabledMcpjsonServers": [
+        "github",
+        "docker",
+        "docker-compose",
+        "postgres-readonly",
+        "basic-memory",
+        "obsidian",
+        "powerpoint",
+        "word-document-server",
+        "pdf-reader",
+        "shadcn",
+        "magicui",
+        "hugeicons",
+        "better-icons",
+        "playwright",
+        "chrome-devtools"
+    ]
+}
